@@ -1,0 +1,17 @@
+settings:
+  path: '2/innerHTML'
+content:
+  -
+    type: style
+    innerHTML: '.wf_form_row{margin-top:10px;}'
+  -
+    type: div
+    attribute:
+      class: 'container-fluid'
+    innerHTML: yml:/plugin/theme/analysis/element/navbar.yml
+  -
+    type: div
+    attribute:
+      class: 'container-fluid'
+    innerHTML:
+      

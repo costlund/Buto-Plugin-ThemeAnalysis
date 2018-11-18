@@ -1,0 +1,19 @@
+version: '1.0'
+plugin:
+  -
+    name: wf/array
+    version: '1.0'
+  -
+    name: wf/yml
+    version: '1.0'
+  -
+    name: datatable/datatable_1_10_16
+    version: '1.0'
+sys:
+  -
+    name: mercury
+    version:
+      - '1.0'
+php:
+  - 7.0.10
+ 

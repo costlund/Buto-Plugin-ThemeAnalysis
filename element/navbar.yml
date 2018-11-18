@@ -1,0 +1,73 @@
+-
+  type: nav
+  attribute:
+    class: 'navbar navbar-default'
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: navbar-header
+      innerHTML:
+        -
+          type: button
+          attribute:
+            type: button
+            class: 'navbar-toggle collapsed'
+            data-toggle: collapse
+            data-target: '#bs-example-navbar-collapse-2'
+            aria-expanded: 'false'
+          innerHTML:
+            0:
+              type: span
+              attribute:
+                class: icon-bar
+            1:
+              type: span
+              attribute:
+                class: icon-bar
+            3:
+              type: span
+              attribute:
+                class: icon-bar
+        -
+          type: a
+          attribute:
+            class: navbar-brand
+            onclick: "PluginThemeAnalysis.analys();"
+          innerHTML:
+            -
+              type: span
+              attribute:
+                class: 'glyphicon glyphicon-compressed'
+                aria-hidden: true
+    -
+      type: div
+      attribute:
+        class: 'collapse navbar-collapse'
+        id: bs-example-navbar-collapse-2
+      innerHTML:
+        -
+          type: ul
+          attribute:
+            class: 'nav navbar-nav'
+          innerHTML:
+#            -
+#              type: li
+#              innerHTML:
+#                -
+#                  type: a
+#                  innerHTML: Analys
+#            -
+#              type: li
+#              innerHTML:
+#                -
+#                  type: p
+#                  attribute:
+#                    class: navbar-text
+#                  innerHTML:
+#                    -
+#                      type: span
+#                      attribute:
+#                        class: badge
+#                        id: badge_remote
+#                      innerHTML: 

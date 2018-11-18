@@ -1,0 +1,57 @@
+settings:
+  path: 'html/innerHTML/body/innerHTML'
+content:
+  doctype:
+    type: text
+    text: '<!DOCTYPE html>'
+  html:
+    type: html
+    attribute:
+      lang: en
+    innerHTML:
+      head:
+        type: head
+        innerHTML:
+          -
+            type: title
+            innerHTML: 'globals:sys/page/settings/title'
+          -
+            type: widget
+            data:
+              plugin: 'twitter/bootstrap335v'
+              method: all
+          -
+            type: widget
+            data:
+              plugin: 'wf/ajax'
+              method: include
+          -
+            type: widget
+            data:
+              plugin: 'wf/bootstrapjs'
+              method: include
+          -
+            type: widget
+            data:
+              plugin: 'wf/callbackjson'
+              method: include
+          -
+            type: widget
+            data:
+              plugin: 'wf/dom'
+              method: include
+          -
+            type: widget
+            data:
+              plugin: 'datatable/datatable_1_10_16'
+              method: include
+          -
+            type: widget
+            data:
+              plugin: 'wf/embed'
+              method: js
+              data:
+                file: /plugin/theme/analysis/js/function.js
+      body:
+        type: body
+        innerHTML: 'body...'

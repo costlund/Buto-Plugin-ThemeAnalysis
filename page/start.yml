@@ -1,0 +1,27 @@
+settings:
+  layout:
+    - html
+    - main
+  title: yml:/plugin/theme/analysis/data/data.yml:title
+content:
+  -
+    type: script
+    innerHTML: rs:json
+  -
+    type: script
+    innerHTML: console.log(app.class)
+  -
+    type: p
+    attribute:
+      id: hidden_class
+      style: 'display:none'
+    innerHTML: '[[class]]'
+  -
+    type: div
+    attribute:
+      id: start
+      style: 'min-height:600px'
+    innerHTML: 'start...'
+      
+
+  

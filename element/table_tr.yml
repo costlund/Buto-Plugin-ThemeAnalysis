@@ -1,0 +1,35 @@
+type: tr
+innerHTML:
+  -
+    type: td
+    innerHTML: rs:name
+  -
+    type: td
+    innerHTML: rs:version
+  -
+    type: td
+    innerHTML: rs:plugin_module
+  -
+    type: td
+    innerHTML: rs:plugin
+  -
+    type: td
+    innerHTML: rs:event
+  -
+    type: td
+    innerHTML: rs:has_manifest
+  -
+    type: td
+    innerHTML: rs:version_manifest
+  -
+    type: td
+    innerHTML: rs:theme_version_conflict
+  -
+    type: td
+    innerHTML: rs:manifest_plugin
+  -
+    type: td
+    innerHTML: rs:version_conflict
+   
+   
+   

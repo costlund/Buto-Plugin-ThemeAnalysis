@@ -1,0 +1,68 @@
+-
+  type: table
+  attribute:
+    class: 'table table-striped table-responsive table-hover table-condensed'
+    id: my_table
+  innerHTML:
+    -
+      type: thead
+      innerHTML:
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Name
+            -
+              type: th
+              innerHTML: Version (theme)
+            -
+              type: th
+              innerHTML: Plugin module
+            -
+              type: th
+              innerHTML: Plugin
+            -
+              type: th
+              innerHTML: Event
+            -
+              type: th
+              innerHTML: Manifest
+            -
+              type: th
+              innerHTML: Version (plugin)
+            -
+              type: th
+              innerHTML: Version conflict
+            -
+              type: th
+              innerHTML: Manifest plugin
+            -
+              type: th
+              innerHTML: Version conflict
+    -
+      type: tbody
+      innerHTML: rs:trs
+    -
+      type: widget
+      data:
+        plugin: datatable/datatable_1_10_16
+        method: run
+        data:
+
+          id: my_table
+          json:
+            paging: true
+            iDisplayLength : 100
+            ordering: true
+            info: true
+            searching: true
+            order:
+              -
+                - 0
+                - asc
+            language:
+              url: /plugin/datatable/datatable_1_10_16/i18n/Swedish.json
+              _url: //cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json    
+  
+
