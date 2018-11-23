@@ -62,16 +62,18 @@ class PluginThemeAnalysis{
   }
   private function setData(){
     $settings = new PluginWfYml('/theme/[theme]/config/settings.yml');
+    //wfHelp::yml_dump($settings);
     $this->data = new PluginWfArray();
     /**
      * Plugin modules.
      */
     foreach ($settings->get('plugin_modules') as $key => $value) {
       $item = new PluginWfArray($value);
-      $item = $this->handleItem($item);
+      $item = $this->handleItem($item, 'plugin_modules', $settings);
       $this->data->set(str_replace('/', '.', $item->get('plugin')).'/name', $item->get('plugin'));
       $this->data->set(str_replace('/', '.', $item->get('plugin')).'/plugin_module', true);
       $this->data->set(str_replace('/', '.', $item->get('plugin')).'/version', $item->get('version'));
+      //$this->data->set(str_replace('/', '.', $item->get('plugin')).'/version', $settings->get('plugin/'.$item->get('plugin').'/version'));
     }
     /**
      * Plugin.
@@ -79,9 +81,11 @@ class PluginThemeAnalysis{
     foreach ($settings->get('plugin') as $key => $value) {
       foreach ($value as $key2 => $value2) {
         $item = new PluginWfArray($value2);
-        $item = $this->handleItem($item);
+        $item = $this->handleItem($item, 'plugin', $settings);
         $this->data->set($key.'.'.$key2.'/name', $key.'/'.$key2);
-        $this->data->set($key.'.'.$key2.'/plugin', true);
+        if($item->get('enabled')){
+          $this->data->set($key.'.'.$key2.'/plugin', true);
+        }
         $this->data->set($key.'.'.$key2.'/version', $item->get('version'));
       }
     }
@@ -92,10 +96,11 @@ class PluginThemeAnalysis{
       foreach ($settings->get('events') as $key => $value) {
         foreach ($value as $key2 => $value2) {
           $item = new PluginWfArray($value2);
-          $item = $this->handleItem($item);
+          $item = $this->handleItem($item, 'events', $settings);
           $this->data->set(str_replace('/', '.', $value2['plugin']).'/name', $value2['plugin']);
           $this->data->set(str_replace('/', '.', $value2['plugin']).'/event', true);
           $this->data->set(str_replace('/', '.', $value2['plugin']).'/version', $item->get('version'));
+          //$this->data->set(str_replace('/', '.', $value2['plugin']).'/version', $settings->get('plugin/'.$value2['plugin'].'/version'));
         }
       }
     }
@@ -170,8 +175,18 @@ class PluginThemeAnalysis{
       }
     }
   }
-  private function handleItem($item){
-    if(!$item->get('version')){$item->set('version', '(not set)');}
+  private function handleItem($item, $type, $settings){
+    //wfHelp::yml_dump(array($type, $item->get()));
+    if($type=='plugin'){
+      $version = $item->get('version');
+    }else{
+      $version = $settings->get('plugin/'.$item->get('plugin').'/version');
+    }
+    if(!$version){
+      $item->set('version', '(not set)');
+    }else{
+      $item->set('version', $version);
+    }
     return $item;
   }
   private function setManifest($key, $value){

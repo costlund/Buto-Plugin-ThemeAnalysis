@@ -15,7 +15,7 @@
               innerHTML: Name
             -
               type: th
-              innerHTML: Version (theme)
+              innerHTML: Theme version
             -
               type: th
               innerHTML: Plugin module
@@ -30,16 +30,16 @@
               innerHTML: Manifest
             -
               type: th
-              innerHTML: Version (plugin)
+              innerHTML: Plugin version
             -
               type: th
-              innerHTML: Version conflict
+              innerHTML: Plugin conflict
             -
               type: th
-              innerHTML: Manifest plugin
+              innerHTML: Inherit plugin
             -
               type: th
-              innerHTML: Version conflict
+              innerHTML: Inherit conflict
     -
       type: tbody
       innerHTML: rs:trs
