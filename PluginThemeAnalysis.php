@@ -4,11 +4,11 @@
  */
 class PluginThemeAnalysis{
   private $settings = null;
-  private $data = null;
+  public $data = null;
   function __construct($buto) {
     if($buto){
-      /**¨
-       * ¨Include.
+      /**
+       * Include.
        */
       wfPlugin::includeonce('wf/array');
       wfPlugin::includeonce('wf/yml');
@@ -23,16 +23,19 @@ class PluginThemeAnalysis{
         exit('Role issue says PluginThemeAnalysis.');
       }
       /**
-       * Layout path.
-       */
-      wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/theme/analysis/layout');
-      /**
        * Settings.
        */
       $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
     }
   }
   public function page_start(){
+    /**
+     * Layout path.
+     */
+    wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/theme/analysis/layout');
+    /**
+     * 
+     */
     wfPlugin::includeonce('wf/yml');
     $page = new PluginWfYml(__DIR__.'/page/start.yml');
     /**
@@ -60,8 +63,11 @@ class PluginThemeAnalysis{
     wfDocument::renderElement($element->get());
     wfHelp::yml_dump($this->data, true);
   }
-  private function setData(){
-    $settings = new PluginWfYml('/theme/[theme]/config/settings.yml');
+  public function setData($theme = null){
+    if(is_null($theme)){
+      $theme = '[theme]';
+    }
+    $settings = new PluginWfYml("/theme/$theme/config/settings.yml");
     //wfHelp::yml_dump($settings);
     $this->data = new PluginWfArray();
     /**
