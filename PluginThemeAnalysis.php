@@ -84,15 +84,17 @@ class PluginThemeAnalysis{
     /**
      * Plugin.
      */
-    foreach ($settings->get('plugin') as $key => $value) {
-      foreach ($value as $key2 => $value2) {
-        $item = new PluginWfArray($value2);
-        $item = $this->handleItem($item, 'plugin', $settings);
-        $this->data->set($key.'.'.$key2.'/name', $key.'/'.$key2);
-        if($item->get('enabled')){
-          $this->data->set($key.'.'.$key2.'/plugin', true);
+    if($settings->get('plugin')){
+      foreach ($settings->get('plugin') as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+          $item = new PluginWfArray($value2);
+          $item = $this->handleItem($item, 'plugin', $settings);
+          $this->data->set($key.'.'.$key2.'/name', $key.'/'.$key2);
+          if($item->get('enabled')){
+            $this->data->set($key.'.'.$key2.'/plugin', true);
+          }
+          $this->data->set($key.'.'.$key2.'/version', $item->get('version'));
         }
-        $this->data->set($key.'.'.$key2.'/version', $item->get('version'));
       }
     }
     /**
