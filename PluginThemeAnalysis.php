@@ -68,18 +68,18 @@ class PluginThemeAnalysis{
       $theme = '[theme]';
     }
     $settings = new PluginWfYml("/theme/$theme/config/settings.yml");
-    //wfHelp::yml_dump($settings);
     $this->data = new PluginWfArray();
     /**
      * Plugin modules.
      */
-    foreach ($settings->get('plugin_modules') as $key => $value) {
-      $item = new PluginWfArray($value);
-      $item = $this->handleItem($item, 'plugin_modules', $settings);
-      $this->data->set(str_replace('/', '.', $item->get('plugin')).'/name', $item->get('plugin'));
-      $this->data->set(str_replace('/', '.', $item->get('plugin')).'/plugin_module', true);
-      $this->data->set(str_replace('/', '.', $item->get('plugin')).'/version', $item->get('version'));
-      //$this->data->set(str_replace('/', '.', $item->get('plugin')).'/version', $settings->get('plugin/'.$item->get('plugin').'/version'));
+    if($settings->get('plugin_modules')){
+      foreach ($settings->get('plugin_modules') as $key => $value) {
+        $item = new PluginWfArray($value);
+        $item = $this->handleItem($item, 'plugin_modules', $settings);
+        $this->data->set(str_replace('/', '.', $item->get('plugin')).'/name', $item->get('plugin'));
+        $this->data->set(str_replace('/', '.', $item->get('plugin')).'/plugin_module', true);
+        $this->data->set(str_replace('/', '.', $item->get('plugin')).'/version', $item->get('version'));
+      }
     }
     /**
      * Plugin.
@@ -144,7 +144,6 @@ class PluginThemeAnalysis{
         if($item->get('manifest/plugin')){
           foreach ($item->get('manifest/plugin') as $key2 => $value2) {
             $item2 = new PluginWfArray($value2);
-            
             $version = $this->data->get(str_replace('/', '.', $item2->get('name')).'/manifest/version');
             $star = null;
             if($item2->get('version')!=$version){
@@ -184,7 +183,6 @@ class PluginThemeAnalysis{
     }
   }
   private function handleItem($item, $type, $settings){
-    //wfHelp::yml_dump(array($type, $item->get()));
     if($type=='plugin'){
       $version = $item->get('version');
     }else{
