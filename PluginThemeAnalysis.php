@@ -86,6 +86,9 @@ class PluginThemeAnalysis{
      */
     if($settings->get('plugin')){
       foreach ($settings->get('plugin') as $key => $value) {
+        if(!$value){
+          continue;
+        }
         foreach ($value as $key2 => $value2) {
           $item = new PluginWfArray($value2);
           $item = $this->handleItem($item, 'plugin', $settings);
