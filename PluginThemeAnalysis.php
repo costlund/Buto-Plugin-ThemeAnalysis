@@ -5,28 +5,33 @@
 class PluginThemeAnalysis{
   private $settings = null;
   public $data = null;
-  function __construct($buto) {
-    if($buto){
-      /**
-       * Include.
-       */
-      wfPlugin::includeonce('wf/array');
-      wfPlugin::includeonce('wf/yml');
-      /**
-       * Enable.
-       */
-      wfPlugin::enable('datatable/datatable_1_10_16');
-      /**
-       * Only webmaster.
-       */
-      if(!wfUser::hasRole('webmaster')){
-        exit('Role issue says PluginThemeAnalysis.');
-      }
-      /**
-       * Settings.
-       */
-      $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
+  function __construct($data = array()) {
+    /**
+     * Include.
+     */
+    wfPlugin::includeonce('wf/array');
+    wfPlugin::includeonce('wf/yml');
+    /**
+     * 
+     */
+    if(!is_array($data)){
+      $data = array();
     }
+    $data = new PluginWfArray(array_merge(array('secure' => true), $data));
+    /**
+     * Enable.
+     */
+    wfPlugin::enable('datatable/datatable_1_10_16');
+    /**
+     * Only webmaster.
+     */
+    if(!wfUser::hasRole('webmaster') && $data->get('secure')){
+      exit('Role issue says PluginThemeAnalysis.');
+    }
+    /**
+     * Settings.
+     */
+    $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
   }
   public function page_start(){
     /**
