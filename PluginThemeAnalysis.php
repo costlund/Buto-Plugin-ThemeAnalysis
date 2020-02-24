@@ -138,6 +138,11 @@ class PluginThemeAnalysis{
       }
     }
     /**
+     * 
+     */
+    wfPlugin::includeonce('git/kbjr');
+    $git = new PluginGitKbjr();
+    /**
      * Modify data.
      */
     foreach ($this->data->get() as $key => $value) {
@@ -187,6 +192,21 @@ class PluginThemeAnalysis{
         $this->data->set("$key/theme_version_conflict", 'Yes');
       }else{
         $this->data->set("$key/theme_version_conflict", '');
+      }
+      /**
+       * Public folder
+       */
+      $this->data->set("$key/has_public", wfFilesystem::fileExist(wfGlobals::getAppDir().'/plugin/'.$item->get('name').'/public'));
+      /**
+       * Git
+       */
+      $git->set_repo($item->get('name'));
+      if($git->exist()){
+        $this->data->set("$key/has_git", true);
+        $this->data->set("$key/git_url", $git->remote_get_url_origin());
+      }else{
+        $this->data->set("$key/has_git", false);
+        $this->data->set("$key/git_url", null);
       }
     }
   }
