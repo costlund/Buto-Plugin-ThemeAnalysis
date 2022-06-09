@@ -1,5 +1,9 @@
-version: 1.2.1
+version: 1.2.2
 history:
+  1.2.2:
+    date: '2022-06-09'
+    title: I18n
+    description: 'Remove reference to json file because it will be auto set.'
   1.2.1:
     date: '2022-06-07'
     title: Versions
