@@ -37,7 +37,7 @@ class PluginThemeAnalysis{
     /**
      * Layout path.
      */
-    wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/theme/analysis/layout');
+    wfGlobals::setSys('layout_path', '/plugin/theme/analysis/layout');
     /**
      * 
      */
@@ -81,9 +81,9 @@ class PluginThemeAnalysis{
       foreach ($settings->get('plugin_modules') as $key => $value) {
         $item = new PluginWfArray($value);
         $item = $this->handleItem($item, 'plugin_modules', $settings);
-        $this->data->set(str_replace('/', '.', $item->get('plugin')).'/name', $item->get('plugin'));
-        $this->data->set(str_replace('/', '.', $item->get('plugin')).'/plugin_module', true);
-        $this->data->set(str_replace('/', '.', $item->get('plugin')).'/version', $item->get('version'));
+        $this->data->set(wfPhpfunc::str_replace('/', '.', $item->get('plugin')).'/name', $item->get('plugin'));
+        $this->data->set(wfPhpfunc::str_replace('/', '.', $item->get('plugin')).'/plugin_module', true);
+        $this->data->set(wfPhpfunc::str_replace('/', '.', $item->get('plugin')).'/version', $item->get('version'));
       }
     }
     /**
@@ -113,10 +113,10 @@ class PluginThemeAnalysis{
         foreach ($value as $key2 => $value2) {
           $item = new PluginWfArray($value2);
           $item = $this->handleItem($item, 'events', $settings);
-          $this->data->set(str_replace('/', '.', $value2['plugin']).'/name', $value2['plugin']);
-          $this->data->set(str_replace('/', '.', $value2['plugin']).'/event', true);
-          $this->data->set(str_replace('/', '.', $value2['plugin']).'/version', $item->get('version'));
-          //$this->data->set(str_replace('/', '.', $value2['plugin']).'/version', $settings->get('plugin/'.$value2['plugin'].'/version'));
+          $this->data->set(wfPhpfunc::str_replace('/', '.', $value2['plugin']).'/name', $value2['plugin']);
+          $this->data->set(wfPhpfunc::str_replace('/', '.', $value2['plugin']).'/event', true);
+          $this->data->set(wfPhpfunc::str_replace('/', '.', $value2['plugin']).'/version', $item->get('version'));
+          //$this->data->set(wfPhpfunc::str_replace('/', '.', $value2['plugin']).'/version', $settings->get('plugin/'.$value2['plugin'].'/version'));
         }
       }
     }
@@ -157,7 +157,7 @@ class PluginThemeAnalysis{
         if($item->get('manifest/plugin')){
           foreach ($item->get('manifest/plugin') as $key2 => $value2) {
             $item2 = new PluginWfArray($value2);
-            $version = $this->data->get(str_replace('/', '.', $item2->get('name')).'/manifest/version');
+            $version = $this->data->get(wfPhpfunc::str_replace('/', '.', $item2->get('name')).'/manifest/version');
             $star = null;
             if($item2->get('version')!=$version){
               $version_conflict = 'Yes';
@@ -165,7 +165,7 @@ class PluginThemeAnalysis{
             }
             $str .= $item2->get('name').'('.$item2->get('version').''.$star.'), ';
           }
-          $str = substr($str, 0, strlen($str)-2);
+          $str = wfPhpfunc::substr($str, 0, wfPhpfunc::strlen($str)-2);
         }
         $this->data->set("$key/manifest_plugin", $str);
       }
@@ -233,8 +233,8 @@ class PluginThemeAnalysis{
       if(is_array($manifest->get('plugin'))){
         foreach ($manifest->get('plugin') as $key2 => $value2) {
           $item = new PluginWfArray($value2);
-          $this->data->set(str_replace('/', '.', $value2['name']).'/name', $value2['name']);
-          $this->data->set(str_replace('/', '.', $value2['name']).'/inherit', true);
+          $this->data->set(wfPhpfunc::str_replace('/', '.', $value2['name']).'/name', $value2['name']);
+          $this->data->set(wfPhpfunc::str_replace('/', '.', $value2['name']).'/inherit', true);
         }
       }
     }else{
